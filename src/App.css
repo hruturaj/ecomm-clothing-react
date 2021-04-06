@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Akaya Telivigala', cursive;
 }
