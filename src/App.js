@@ -3,10 +3,10 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { HomePage } from "./pages/homePage/homePage-component.jsx";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { ShopPage } from "./pages/shop/shop-component.jsx";
 import Header from "./components/header/header.component.jsx";
-import { signIn_signUp } from "./pages/signIn-signUp/signIn-signUp.component.jsx";
+import { SignInAndSignUp } from "./pages/signIn-signUp/signIn-signUp.component.jsx";
 import {
   auth,
   createUserProfileDocument,
@@ -25,6 +25,7 @@ class App extends React.Component {
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
+    console.log(this.props);
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -53,12 +54,28 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/signIn" component={signIn_signUp}></Route>
+          <Route
+            exact
+            path="/signIn"
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to="/"></Redirect>
+              ) : (
+                <SignInAndSignUp />
+              )
+            }
+          ></Route>
         </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ user }) => {
+  return {
+    currentUser: user.currentUser,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -66,4 +83,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

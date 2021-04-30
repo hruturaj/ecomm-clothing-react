@@ -4,7 +4,7 @@ import { SignUp } from "../../components/signUp/signUp.component.jsx";
 
 import "./signIn-signUp-style.scss";
 
-export const signIn_signUp = () => (
+export const SignInAndSignUp = () => (
   <div className="sign-in-sign-out">
     <SignIn></SignIn>
     <SignUp></SignUp>
