@@ -13,11 +13,25 @@
     font-weight: bolder;
     border: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
   
     &:hover {
       background-color: white;
       color: black;
       border: 1px solid black;
+    }
+
+    &.inverted{
+      background-color: white;
+      color: #132540;
+      border: 1px solid #132540;
+
+      &:hover{
+        background-color: #132540;
+        color: white;
+        border: 1px solid white;
+      }
     }
 
     &.google-sign-in{
